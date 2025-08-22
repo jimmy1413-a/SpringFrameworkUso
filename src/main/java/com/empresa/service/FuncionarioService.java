@@ -15,9 +15,15 @@ public class FuncionarioService {
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
+	
 	public Funcionario guardar(Funcionario request) {
+		Funcionario nuevo = new Funcionario();
+		nuevo.setCedula(request.getCedula());
+		nuevo.setNombre(request.getNombre());
+		nuevo.setEmail(request.getEmail());
+		nuevo.setTelefono(request.getTelefono());
 		
-		return funcionarioRepository.save(request);
+		return funcionarioRepository.save(nuevo);
 		
 	}
 	
