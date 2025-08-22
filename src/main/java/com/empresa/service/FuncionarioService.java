@@ -15,7 +15,7 @@ public class FuncionarioService {
 	@Autowired
 	private FuncionarioRepository funcionarioRepository;
 	
-	private Funcionario guardar(Funcionario request) {
+	public Funcionario guardar(Funcionario request) {
 		
 		return funcionarioRepository.save(request);
 		
@@ -33,11 +33,20 @@ public class FuncionarioService {
 	
 	public Funcionario actualizar(Integer id,Funcionario request){
 		Optional<Funcionario> f = funcionarioRepository.findById(id);
-		return f.map()
-		
-		
-				
-		
-		
+		if(f.isPresent()) {
+			Funcionario nuevo = f.get();
+			nuevo.setCedula(request.getCedula());
+			nuevo.setNombre(request.getNombre());
+			nuevo.setEmail(request.getEmail());
+			nuevo.setTelefono(request.getTelefono());
+			
+			return funcionarioRepository.save(nuevo);
+		}else {
+			return null;
+		}
+	}
+	
+	public void eliminar(Integer id) {
+		funcionarioRepository.deleteById(id);
 	}
 }
